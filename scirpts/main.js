@@ -54,5 +54,4 @@ const getToolDetails = async (id) =>{
 
 const showToolDetails = data =>{
     const modalElement = document.getElementById('modal-element');
-    document.createElement('div')
 }
