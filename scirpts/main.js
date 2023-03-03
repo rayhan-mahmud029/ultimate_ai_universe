@@ -1,4 +1,5 @@
 const getData = async () => {
+    progressToggler(true);
     const resp = await fetch('https://openapi.programming-hero.com/api/ai/tools');
     const data = await resp.json();
     const tools = data.data.tools.slice(0, 6);
@@ -42,11 +43,22 @@ const showData = (data) => {
         `
         cardContainer.appendChild(cardDiv);
     })
+    const body = document.querySelector('body');
     const showMoreDiv = document.createElement('div');
+    showMoreDiv.classList.add('w-3/12', 'mx-auto', 'my-4');
+    showMoreDiv.innerHTML = `
+    <button class="btn w-full" onclick="showAll()">Show More</button>
+    `
+    body.appendChild(showMoreDiv);
+
+    // Stop Progress Bar
+    progressToggler(false);
+
 }
 
 // Get Individual Tool Data
 const getToolDetails = async (id) => {
+    progressToggler(true);
     console.log(id);
     const resp = await fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`);
     const data = await resp.json();
@@ -117,7 +129,7 @@ const showToolDetails = data => {
           <div class="flex-1 text-center  p-6 border rounded-lg border-2 border-zinc-400">
               <figure class="relative">
                   <img src="${image_link[0]}" alt="" class="rounded-lg">
-                  <div class="badge badge-secondary absolute right-2 top-2 p-2 text-xs ${accuracy.score === null ? 'hidden' : ''}" id="badge-element">${accuracy.score}% Accuracy</div>
+                  <div class="badge badge-secondary absolute right-2 top-2 p-2 text-xs ${accuracy.score === null ? 'hidden' : ''}" id="badge-element">${accuracy.score !== null ? accuracy.score*100 : ''}% Accuracy</div>
               </figure>
               <h1 class="text-xl font-semibold mt-4">${input_output_examples !== null ? input_output_examples[0].input : 'No Example Available'}</h1>
               <p class="text-sm text-neutral-600">${input_output_examples !== null ? input_output_examples[0].output : 'No Example Available'}</p>
@@ -132,4 +144,19 @@ const showToolDetails = data => {
     </div>
       <!-- MODAL INNER BODY -->
     `
+
+    // Stop Progress Bar
+    progressToggler(false);
+}
+
+
+// Progress Bar Showing Function
+const progressToggler = isLoading => {
+    const progressBar = document.getElementById('progress-bar');
+    if (isLoading){
+        progressBar.classList.remove('hidden');
+    }
+    else{
+        progressBar.classList.add('hidden');
+    }
 }
