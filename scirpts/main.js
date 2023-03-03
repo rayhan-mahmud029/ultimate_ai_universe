@@ -8,7 +8,7 @@ const showData = (data) => {
     const cardContainer = document.getElementById('card-container')
     const toolsArray = data.tools;
     toolsArray.forEach(tool => {
-        const {name, features, published_in, image} = tool;
+        const {id, name, features, published_in, image} = tool;
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('card', 'w-96', 'bg-base-100', 'shadow-xl');
         cardDiv.innerHTML = `
@@ -32,7 +32,9 @@ const showData = (data) => {
                         <p class="text-sm text-neutral-400">${published_in}</p>
                         </div>
                         <div>
-                        <i class="fa-solid fa-arrow-right rounded-full bg-cyan-300 p-3 text-neutral-500" for="my-modal-3"></i>
+                        <label for="my-modal-3" onclick="getToolDetails('${id}')">
+                        <i class="fa-solid fa-arrow-right rounded-full bg-cyan-300 p-3 text-neutral-500"></i>
+                        </label>
                         </div>
                     </div>
                 </div>
@@ -40,4 +42,17 @@ const showData = (data) => {
         `
         cardContainer.appendChild(cardDiv);
     })
+}
+
+// Get Individual Tool Data
+const getToolDetails = async (id) =>{
+    console.log(id);
+    const resp = await fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`);
+    const data = await resp.json();
+    showToolDetails(data.data);
+}
+
+const showToolDetails = data =>{
+    const modalElement = document.getElementById('modal-element');
+    document.createElement('div')
 }
