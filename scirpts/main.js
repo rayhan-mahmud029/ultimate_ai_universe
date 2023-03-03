@@ -27,8 +27,8 @@ const showData = (data) => {
                          <h2 class="text-2xl font-bold lead">${name}</h2>
 
                     <div class="w-full flex items-center justify-between gap-2">
-                       <div class="flex">
-                        <i class="fa-solid fa-calendar-days text-neutral-400"></i>
+                       <div class="flex items-center">
+                        <i class="fa-solid fa-calendar-days text-neutral-400 mr-2"></i>
                         <p class="text-sm text-neutral-400">${published_in}</p>
                         </div>
                         <div>
