@@ -8,7 +8,7 @@ const getData = async (limit) => {
 const showData = (data, limit) => {
     const showMoreButton = document.getElementById('show-more');
     if (limit) {
-        showMoreButton.classList.remove('hidden');
+        showMoreButton.classList.remove('hidden'); 
         data = data.data.tools.slice(0, limit);
     }
     else {
@@ -85,16 +85,16 @@ const showToolDetails = data => {
               <!-- Price Boxes -->
               <div class="flex gap-4 text-center my-6">
                   <div class="flex-1 p-2 bg-cyan-200 rounded-lg font-semibold">
-                      <h2 class="text-md">${pricing !== null ? pricing[0].plan : 'N/A'}</h2>
-                      <h2 class="text-md">$${pricing !== null ? pricing[0].price : 'N/A'}</h2>
+                      <h2 class="text-md font-bold">${pricing !== null ? pricing[0].price === 'No cost' ? '' : pricing[0].plan : 'N/A'}</h2>
+                      <h2 class="text-md">${pricing !== null ? pricing[0].price === 'No cost' || '0' ? 'Free of Cost' : pricing[0].price : 'N/A'}</h2>
                   </div>
                   <div class="flex-1 p-2 bg-cyan-200 rounded-lg font-semibold">
-                      <h2 class="text-md">${pricing !== null ? pricing[1].plan : 'N/A'}</h2>
-                      <h2 class="text-md">$${pricing !== null ? pricing[1].price : 'N/A'}</h2>
+                      <h2 class="text-md font-bold">${pricing !== null ? pricing[1].price === 'No cost'  ? '' : pricing[1].plan  : 'N/A'}</h2>
+                      <h2 class="text-md">${pricing !== null ?  pricing[1].price === 'No cost' ? 'Free of Cost' : pricing[1].price : 'N/A'}</h2>
                   </div>
                   <div class="flex-1 p-2 bg-cyan-200 rounded-lg font-semibold">
-                     <h2 class="text-md">${pricing !== null ? pricing[2].plan : 'N/A'}</h2>
-                     <h2 class="text-md">$${pricing !== null ? pricing[2].price : 'N/A'}</h2>
+                     <h2 class="text-md font-bold">${pricing !== null ? pricing[2].price === 'No cost' ? '' : pricing[2].plan  : 'N/A'}</h2>
+                     <h2 class="text-md">${pricing !== null ?  pricing[2].price === 'No cost' ? 'Free of Cost' : pricing[2].price : 'N/A'}</h2>
                   </div>
               </div>
               <!-- Price Boxes -->
@@ -133,10 +133,10 @@ const showToolDetails = data => {
                   <img src="${image_link[0]}" alt="" class="rounded-lg">
                   <div class="badge badge-secondary absolute right-2 top-2 p-2 text-xs ${accuracy.score === null ? 'hidden' : ''}" id="badge-element">${accuracy.score !== null ? accuracy.score * 100 : ''}% Accuracy</div>
               </figure>
-              <h1 class="text-xl font-semibold mt-4">${input_output_examples !== null ? input_output_examples[0].input : 'No Example Available'}</h1>
-              <p class="text-sm text-neutral-600">${input_output_examples !== null ? input_output_examples[0].output : 'No Example Available'}</p>
-              <h1 class="text-xl font-semibold mt-4">${input_output_examples !== null ? input_output_examples[1].input : 'No Example Available'}</h1>
-              <p class="text-sm text-neutral-600">${input_output_examples !== null ? input_output_examples[1].output : 'No Example Available'}</p>
+              <h1 class="text-xl font-semibold mt-4">${input_output_examples !== null ? input_output_examples[0].input : 'Can you give any example?'}</h1>
+              <p class="text-sm text-neutral-600">${input_output_examples !== null ? input_output_examples[0].output : 'No! Not Yet! Take a break!!!'}</p>
+              <h1 class="text-xl font-semibold mt-4">${input_output_examples !== null ? input_output_examples[1].input : 'Can you give any example?'}</h1>
+              <p class="text-sm text-neutral-600">${input_output_examples !== null ? input_output_examples[1].output : 'No! Not Yet! Take a break!!!'}</p>
   
               
           </div>
