@@ -1,13 +1,13 @@
 const getData = async () => {
     const resp = await fetch('https://openapi.programming-hero.com/api/ai/tools');
     const data = await resp.json();
-    showData(data.data);
+    const tools = data.data.tools.slice(0, 6);
+    showData(tools);
 }
 
 const showData = (data) => {
     const cardContainer = document.getElementById('card-container')
-    const toolsArray = data.tools;
-    toolsArray.forEach(tool => {
+    data.forEach(tool => {
         const { id, name, features, published_in, image } = tool;
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('card', 'w-96', 'bg-base-100', 'shadow-xl');
@@ -42,6 +42,7 @@ const showData = (data) => {
         `
         cardContainer.appendChild(cardDiv);
     })
+    const showMoreDiv = document.createElement('div');
 }
 
 // Get Individual Tool Data
