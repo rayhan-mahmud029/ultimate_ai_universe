@@ -93,25 +93,25 @@ const showToolDetails = data => {
     <!-- MODAL INNER BODY -->
     <div class="modal-box relative  max-w-none w-3/4">
         <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-        <div class="flex gap-4">
+        <div class="flex flex-col lg:flex-row gap-4">
            
           <!-- LEFT MODAL CONTENTS -->
           <div class="flex-1 p-6 border rounded-lg border-2 border-zinc-400">
               <h1 class="text-2xl font-semibold">${description}</h1>
   
               <!-- Price Boxes -->
-              <div class="flex gap-4 text-center my-6">
+              <div class="flex flex-col md:flex-row lg:flex-row gap-4 text-center my-6">
                   <div class="flex-1 p-2 bg-cyan-200 rounded-lg font-semibold">
-                      <h2 class="text-md font-bold">${pricing !== null ? pricing[0].price === 'No cost' ? '' : pricing[0].plan : 'N/A'}</h2>
-                      <h2 class="text-md">${pricing !== null ? pricing[0].price === 'No cost' || '0' ? 'Free of Cost' : pricing[0].price : 'N/A'}</h2>
+                      <h2 class="text-md font-bold">${pricing !== null ? pricing[0].price === 'No cost' ? '' : pricing[0].plan : ''}</h2>
+                      <h2 class="text-md">${pricing !== null ? pricing[0].price === 'No cost' || '0' ? 'Free of Cost' : pricing[0].price : 'Free of Cost'}</h2>
                   </div>
                   <div class="flex-1 p-2 bg-cyan-200 rounded-lg font-semibold">
-                      <h2 class="text-md font-bold">${pricing !== null ? pricing[1].price === 'No cost' ? '' : pricing[1].plan : 'N/A'}</h2>
-                      <h2 class="text-md">${pricing !== null ? pricing[1].price === 'No cost' ? 'Free of Cost' : pricing[1].price : 'N/A'}</h2>
+                      <h2 class="text-md font-bold">${pricing !== null ? pricing[1].price === 'No cost' ? '' : pricing[1].plan : ''}</h2>
+                      <h2 class="text-md">${pricing !== null ? pricing[1].price === 'No cost' ? 'Free of Cost' : pricing[1].price : 'Free of Cost'}</h2>
                   </div>
                   <div class="flex-1 p-2 bg-cyan-200 rounded-lg font-semibold">
-                     <h2 class="text-md font-bold">${pricing !== null ? pricing[2].price === 'No cost' ? '' : pricing[2].plan : 'N/A'}</h2>
-                     <h2 class="text-md">${pricing !== null ? pricing[2].price === 'No cost' ? 'Free of Cost' : pricing[2].price : 'N/A'}</h2>
+                     <h2 class="text-md font-bold">${pricing !== null ? pricing[2].price === 'No cost' ? '' : pricing[2].plan : ''}</h2>
+                     <h2 class="text-md">${pricing !== null ? pricing[2].price === 'No cost' ? 'Free of Cost' : pricing[2].price : 'Free of Cost'}</h2>
                   </div>
               </div>
               <!-- Price Boxes -->
@@ -120,7 +120,7 @@ const showToolDetails = data => {
               <div class="flex gap-4 justify-between">
                   <!-- Features -->
                   <div>
-                      <h1 class="text-2xl font-semibold">Features</h1>
+                      <h1 class="text-xl lg:text-2xl font-semibold">Features</h1>
                       <ol class="list-disc pl-4 text-sm text-neutral-600">
                         <li>${features[1].feature_name ? features[1].feature_name : 'N/A'}</li>
                         <li>${features[2].feature_name ? features[2].feature_name : 'N/A'}</li>
@@ -131,7 +131,7 @@ const showToolDetails = data => {
   
                   <!-- Integrations -->
                   <div>
-                      <h1 class="text-2xl font-semibold">Integrations</h1>
+                      <h1 class="text-xl lg:text-2xl font-semibold">Integrations</h1>
                       <ol class="list-disc pl-4 text-sm text-neutral-600">
                          ${integrations !== null ? integrations.map(a => (`<li>${a}</li>`)).join("") : "No Data Found"}
                       </ol>
