@@ -141,7 +141,7 @@ const showToolDetails = data => {
           <!-- RIGHT MODAL CONTENTS -->
           <div class="flex-1 text-center  p-6 border rounded-lg border-2 border-zinc-400">
               <figure class="relative">
-                  <img src="${image_link[0]}" alt="" class="rounded-lg">
+                  <img src="${image_link[1] === 'undefined'? image_link[1] : image_link[0]}" alt="" class="rounded-lg">
                   <div class="badge badge-secondary absolute right-2 top-2 p-2 text-xs ${accuracy.score === null ? 'hidden' : ''}" id="badge-element">${accuracy.score !== null ? accuracy.score * 100 : ''}% Accuracy</div>
               </figure>
               <h1 class="text-xl font-semibold mt-4">${input_output_examples !== null ? input_output_examples[0].input : 'Can you give any example?'}</h1>
