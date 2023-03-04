@@ -120,8 +120,8 @@ const showToolDetails = data => {
               <div class="flex gap-4 justify-between">
                   <!-- Features -->
                   <div>
-                      <h1 class="text-xl lg:text-2xl font-semibold">Features</h1>
-                      <ol class="list-disc pl-4 text-sm text-neutral-600">
+                      <h1 class="text-lg lg:text-2xl font-semibold">Features</h1>
+                      <ol class="list-disc pl-4 text-xs lg:text-sm text-neutral-600">
                         <li>${features[1].feature_name ? features[1].feature_name : 'N/A'}</li>
                         <li>${features[2].feature_name ? features[2].feature_name : 'N/A'}</li>
                         <li>${features[3].feature_name ? features[3].feature_name : 'N/A'}</li>
@@ -131,8 +131,8 @@ const showToolDetails = data => {
   
                   <!-- Integrations -->
                   <div>
-                      <h1 class="text-xl lg:text-2xl font-semibold">Integrations</h1>
-                      <ol class="list-disc pl-4 text-sm text-neutral-600">
+                      <h1 class="text-lg lg:text-2xl font-semibold">Integrations</h1>
+                      <ol class="list-disc pl-4 text-xs lg:text-sm text-neutral-600">
                          ${integrations !== null ? integrations.map(a => (`<li>${a}</li>`)).join("") : "No Data Found"}
                       </ol>
                   </div>
@@ -148,10 +148,10 @@ const showToolDetails = data => {
                   <img src="${image_link[1] === 'undefined' ? image_link[1] : image_link[0]}" alt="" class="rounded-lg">
                   <div class="badge badge-secondary absolute right-2 top-2 p-2 text-xs ${accuracy.score === null ? 'hidden' : ''}" id="badge-element">${accuracy.score !== null ? accuracy.score * 100 : ''}% Accuracy</div>
               </figure>
-              <h1 class="text-xl font-semibold mt-4">${input_output_examples !== null ? input_output_examples[0].input : 'Can you give any example?'}</h1>
-              <p class="text-sm text-neutral-600">${input_output_examples !== null ? input_output_examples[0].output : 'No! Not Yet! Take a break!!!'}</p>
-              <h1 class="text-xl font-semibold mt-4">${input_output_examples !== null ? input_output_examples[1].input : 'Can you give any example?'}</h1>
-              <p class="text-sm text-neutral-600">${input_output_examples !== null ? input_output_examples[1].output : 'No! Not Yet! Take a break!!!'}</p>
+              <h1 class="text-lg lg:text-xl font-semibold mt-4">${input_output_examples !== null ? input_output_examples[0].input : 'Can you give any example?'}</h1>
+              <p class="text-xs lg:text-sm text-neutral-600">${input_output_examples !== null ? input_output_examples[0].output : 'No! Not Yet! Take a break!!!'}</p>
+              <h1 class="text-lg lg:text-xl font-semibold mt-4">${input_output_examples !== null ? input_output_examples[1].input : 'Can you give any example?'}</h1>
+              <p class="text-xs lg:text-sm text-neutral-600">${input_output_examples !== null ? input_output_examples[1].output : 'No! Not Yet! Take a break!!!'}</p>
   
               
           </div>
