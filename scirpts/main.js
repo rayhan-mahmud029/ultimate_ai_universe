@@ -1,26 +1,33 @@
 const getData = async (limit, isSorted) => {
     progressToggler(true);
+    const isSortedStore = isSorted;
     const resp = await fetch('https://openapi.programming-hero.com/api/ai/tools');
     const data = await resp.json();
-    showData(data, limit, isSorted);
+    showData(data, limit, isSortedStore);
+    return data.data.tools.length;
 }
 
 
 
 const showData = (data, limit, isSorted) => {
     const showMoreButton = document.getElementById('show-more');
-    if (limit && isSorted == true) {
+    if (limit !== undefined && isSorted === true) {
+        data = data.data.tools.sort(function (a, b) {
+            return new Date(b.published_in) - new Date(a.published_in);
+        });
+        data = data.slice(0, limit);
+        showMoreButton.classList.remove('hidden');
+    }
+    else if (limit !== undefined) {
+        showMoreButton.classList.remove('hidden');
+        data = data.data.tools.slice(0, limit);
+    }
+    else if (isSorted === true && limit === undefined) {
         data = data.data.tools.sort(function (a, b) {
             // Turn your strings into dates, and then subtract them
             // to get a value that is either negative, positive, or zero.
             return new Date(b.published_in) - new Date(a.published_in);
         });
-        data = data.slice(0, limit);
-        showMoreButton.classList.remove('hidden'); 
-    }
-    else if (limit){
-        showMoreButton.classList.remove('hidden'); 
-        data = data.data.tools.slice(0, limit);
     }
     else {
         data = data.data.tools;
@@ -99,12 +106,12 @@ const showToolDetails = data => {
                       <h2 class="text-md">${pricing !== null ? pricing[0].price === 'No cost' || '0' ? 'Free of Cost' : pricing[0].price : 'N/A'}</h2>
                   </div>
                   <div class="flex-1 p-2 bg-cyan-200 rounded-lg font-semibold">
-                      <h2 class="text-md font-bold">${pricing !== null ? pricing[1].price === 'No cost'  ? '' : pricing[1].plan  : 'N/A'}</h2>
-                      <h2 class="text-md">${pricing !== null ?  pricing[1].price === 'No cost' ? 'Free of Cost' : pricing[1].price : 'N/A'}</h2>
+                      <h2 class="text-md font-bold">${pricing !== null ? pricing[1].price === 'No cost' ? '' : pricing[1].plan : 'N/A'}</h2>
+                      <h2 class="text-md">${pricing !== null ? pricing[1].price === 'No cost' ? 'Free of Cost' : pricing[1].price : 'N/A'}</h2>
                   </div>
                   <div class="flex-1 p-2 bg-cyan-200 rounded-lg font-semibold">
-                     <h2 class="text-md font-bold">${pricing !== null ? pricing[2].price === 'No cost' ? '' : pricing[2].plan  : 'N/A'}</h2>
-                     <h2 class="text-md">${pricing !== null ?  pricing[2].price === 'No cost' ? 'Free of Cost' : pricing[2].price : 'N/A'}</h2>
+                     <h2 class="text-md font-bold">${pricing !== null ? pricing[2].price === 'No cost' ? '' : pricing[2].plan : 'N/A'}</h2>
+                     <h2 class="text-md">${pricing !== null ? pricing[2].price === 'No cost' ? 'Free of Cost' : pricing[2].price : 'N/A'}</h2>
                   </div>
               </div>
               <!-- Price Boxes -->
@@ -126,9 +133,7 @@ const showToolDetails = data => {
                   <div>
                       <h1 class="text-2xl font-semibold">Integrations</h1>
                       <ol class="list-disc pl-4 text-sm text-neutral-600">
-                      <li>${integrations !== null ? integrations[0] : 'N/A'}</li>
-                      <li>${integrations !== null ? integrations[1] : 'N/A'}</li>
-                      <li>${integrations !== null ? integrations[2] : 'N/A'}</li>
+                         ${integrations !== null ? integrations.map(a => (`<li>${a}</li>`)).join("") : "No Data Found"}
                       </ol>
                   </div>
                   <!-- Integrations End -->
@@ -140,7 +145,7 @@ const showToolDetails = data => {
           <!-- RIGHT MODAL CONTENTS -->
           <div class="flex-1 text-center  p-6 border rounded-lg border-2 border-zinc-400">
               <figure class="relative">
-                  <img src="${image_link[1] === 'undefined'? image_link[1] : image_link[0]}" alt="" class="rounded-lg">
+                  <img src="${image_link[1] === 'undefined' ? image_link[1] : image_link[0]}" alt="" class="rounded-lg">
                   <div class="badge badge-secondary absolute right-2 top-2 p-2 text-xs ${accuracy.score === null ? 'hidden' : ''}" id="badge-element">${accuracy.score !== null ? accuracy.score * 100 : ''}% Accuracy</div>
               </figure>
               <h1 class="text-xl font-semibold mt-4">${input_output_examples !== null ? input_output_examples[0].input : 'Can you give any example?'}</h1>
@@ -173,6 +178,19 @@ const progressToggler = isLoading => {
     }
 }
 
-document.getElementById('sort-button').addEventListener('click', function(){
-    getData(6, true)
+
+document.getElementById('sort-button').addEventListener('click', function () {
+    showMoreHandler(true)
 })
+
+const showMoreHandler = (isSorted, showMore) => {
+    if (isSorted === true && showMore === true) {
+        getData(12, true)
+    }
+    else if (isSorted === true && showMore === undefined) {
+        getData(6, true);
+    }
+    else{
+        getData();
+    }
+}
