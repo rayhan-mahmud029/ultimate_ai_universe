@@ -72,7 +72,6 @@ const showData = (data, limit, isSorted) => {
 // Get Individual Tool Data
 const getToolDetails = async (id) => {
     progressToggler(true);
-    console.log(id);
     const resp = await fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`);
     const data = await resp.json();
     showToolDetails(data.data);
