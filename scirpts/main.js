@@ -1,13 +1,24 @@
-const getData = async (limit) => {
+const getData = async (limit, isSorted) => {
     progressToggler(true);
     const resp = await fetch('https://openapi.programming-hero.com/api/ai/tools');
     const data = await resp.json();
-    showData(data, limit);
+    showData(data, limit, isSorted);
 }
 
-const showData = (data, limit) => {
+
+
+const showData = (data, limit, isSorted) => {
     const showMoreButton = document.getElementById('show-more');
-    if (limit) {
+    if (limit && isSorted == true) {
+        data = data.data.tools.sort(function (a, b) {
+            // Turn your strings into dates, and then subtract them
+            // to get a value that is either negative, positive, or zero.
+            return new Date(b.published_in) - new Date(a.published_in);
+        });
+        data = data.slice(0, limit);
+        showMoreButton.classList.remove('hidden'); 
+    }
+    else if (limit){
         showMoreButton.classList.remove('hidden'); 
         data = data.data.tools.slice(0, limit);
     }
@@ -162,3 +173,7 @@ const progressToggler = isLoading => {
         progressBar.classList.add('hidden');
     }
 }
+
+document.getElementById('sort-button').addEventListener('click', function(){
+    getData(6, true)
+})
